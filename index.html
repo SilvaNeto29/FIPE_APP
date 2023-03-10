@@ -8,6 +8,7 @@
     <title>Consulta FIPE</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <!-- <script
     src="https://code.jquery.com/jquery-3.6.3.js"
     integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
@@ -19,7 +20,7 @@
 
     <script>
         //padronizar a ordem dos parametros
-        getMarcas()
+        // console.log(getMarcas())
 
     </script>
     <div class="grid">
@@ -29,7 +30,10 @@
             <div class="form__field">
                 <label for="slTipo"><i class="fa fa-car icone"></i></label>
                 <select id="slTipo" name="slTipo" class="form__input">
-                    <option>Tipo do Veículo</option>
+                    <option value="0">Tipo do Veículo</option>
+                    <option value="1">Carro</option>
+                    <option value="2">Moto</option>
+                    <option value="3">Caminhão</option>
                 </select>
             </div>
 
@@ -62,7 +66,35 @@
         </form>
 
     </div>
+    <script>
+    
+    let slTipo = document.querySelector('#slTipo');
+    let marca = document.querySelector('#marca');
+    let modelo = document.querySelector('#modelo');
+    let fabricacao = document.querySelector('#fabricacao');
 
+    slTipo.addEventListener('change', function() {
+        if(slTipo.value != 0){
+            const data = await getMarcas();
+            data.options.forEach(function(option) {
+                const newOption = document.createElement("option");
+                newOption.value = option.value;
+                newOption.text = option.text;
+                slTipo.appendChild(newOption);
+            });
+
+        }
+        // } else {
+        //     marca.disabled = true;
+        //     modelo.disabled = true;
+        //     fabricacao.disabled = true;
+        // }
+    }, false);
+
+
+    //Disabled on load
+
+    </script>
 </body>
 
 </html>
