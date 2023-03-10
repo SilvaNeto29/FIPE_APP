@@ -123,6 +123,11 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+select:disabled {
+    color: #606468;
+    pointer-events: none;
+  }
+
 .form {
     display: grid;
     gap: var(--formGap);

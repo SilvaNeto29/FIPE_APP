@@ -1,4 +1,4 @@
-function getMarcas(tipoVeiculo = 'carros'){
+async function getMarcas(tipoVeiculo = 'carros'){
 
     let requestOptions = {
         method: 'GET',
@@ -58,6 +58,9 @@ function getValorVeiculo(modelo = "5940",tipoVeiculo = "carros", codMarca = "59"
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
-
-   
 }
+
+// let slTipo = document.querySelector('#slTipo');
+// slTipo.addEventListener('change', function() {
+//   console.log('aqui')
+// }, false);
