@@ -19,8 +19,10 @@
 <body class="align">
 
     <script>
-        //padronizar a ordem dos parametros
-        // console.log(getMarcas())
+        // //padronizar a ordem dos parametros
+        // getMarcas().then(promiseResult => {
+        //     console.log(promiseResult[2]); // Array retornado pela API
+        // });
 
     </script>
     <div class="grid">
@@ -74,25 +76,34 @@
     let fabricacao = document.querySelector('#fabricacao');
 
     slTipo.addEventListener('change', function() {
-        if(slTipo.value != 0){
-            const data = await getMarcas();
-            data.options.forEach(function(option) {
-                const newOption = document.createElement("option");
-                newOption.value = option.value;
-                newOption.text = option.text;
-                slTipo.appendChild(newOption);
-            });
 
-        }
-        // } else {
-        //     marca.disabled = true;
-        //     modelo.disabled = true;
-        //     fabricacao.disabled = true;
-        // }
-    }, false);
+    });
+
+    window.addEventListener('load', function () {
+
+        console.log(getMarcas())
+
+        getMarcas().then(promiseResult => {
+
+            let jsonMarcas = Object.entries(promiseResult);
+            console.log(jsonMarcas)
+            let select = document.getElementById("marca");
+
+            for (let chave in jsonMarcas) {
+                let option = document.createElement("option");
+                option.value = chave;
+                option.text = jsonMarcas[chave];
+                select.add(option);
+            }
+
+        });
+    
+    });
 
 
-    //Disabled on load
+
+
+
 
     </script>
 </body>

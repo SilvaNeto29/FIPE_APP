@@ -1,4 +1,4 @@
-async function getMarcas(tipoVeiculo = 'carros'){
+function getMarcas(tipoVeiculo = 'carros'){
 
     let requestOptions = {
         method: 'GET',
@@ -8,11 +8,11 @@ async function getMarcas(tipoVeiculo = 'carros'){
     let url = "https://parallelum.com.br/fipe/api/v1/" + tipoVeiculo + "/marcas"
       
     return  fetch(url, requestOptions)
-        .then(response => {
-            return response.json();
-        })
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+      .then(response => response.json())
+      .then(result => {
+        return result;
+      })
+      .catch(error => console.log('error', error));
 }
 
 function getModelos(tipoVeiculo = "carros", codMarca = "59") {
