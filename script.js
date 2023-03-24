@@ -1,18 +1,26 @@
 function getMarcas(tipoVeiculo = 'carros'){
 
-    let requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-    
-    let url = "https://parallelum.com.br/fipe/api/v1/" + tipoVeiculo + "/marcas"
-      
-    return  fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        return result;
-      })
-      .catch(error => console.log('error', error));
+  $.ajax({
+    url: "https://parallelum.com.br/fipe/api/v1/" + tipoVeiculo + "/marcas",
+    method: "GET",
+    success: function(response) {
+        
+      let select = document.querySelector('#marca');
+      let options = response;
+
+      for(var i = 0; i < options.length; i++) {
+          var opt = options[i];
+          var el = document.createElement("option");
+          el.textContent = opt.nome;
+          el.value = opt.codigo;
+          select.appendChild(el);
+      }
+
+    },
+    error: function(error) {
+            console.log(error);
+    }
+    });
 }
 
 function getModelos(tipoVeiculo = "carros", codMarca = "59") {
@@ -60,7 +68,3 @@ function getValorVeiculo(modelo = "5940",tipoVeiculo = "carros", codMarca = "59"
         .catch(error => console.log('error', error));
 }
 
-// let slTipo = document.querySelector('#slTipo');
-// slTipo.addEventListener('change', function() {
-//   console.log('aqui')
-// }, false);

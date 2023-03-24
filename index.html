@@ -30,11 +30,11 @@
         <form action="#" method="POST" class="form login">
 
             <div class="form__field">
-                <label for="slTipo"><i class="fa fa-car icone"></i></label>
-                <select id="slTipo" name="slTipo" class="form__input">
+                <label for="tipo"><i class="fa fa-car icone"></i></label>
+                <select id="tipo" name="tipo" class="form__input">
                     <option value="0">Tipo do Veículo</option>
-                    <option value="1">Carro</option>
-                    <option value="2">Moto</option>
+                    <option value="carros">Carro</option>
+                    <option value="motos">Moto</option>
                     <option value="3">Caminhão</option>
                 </select>
             </div>
@@ -42,7 +42,7 @@
             <div class="form__field">
                 <label for="marca"><i class="fa fa-bookmark icone"></i></label>
                 <select id="marca" name="marca" class="form__input">
-                    <option>Marca</option>
+                    <option value="0">Marca</option>
                 </select>
             </div>
 
@@ -70,38 +70,28 @@
     </div>
     <script>
     
-    let slTipo = document.querySelector('#slTipo');
-    let marca = document.querySelector('#marca');
-    let modelo = document.querySelector('#modelo');
-    let fabricacao = document.querySelector('#fabricacao');
+    let tipo = document.querySelector('#tipo');
+    // let marca = document.querySelector('#marca');
+    // let modelo = document.querySelector('#modelo');
+    // let fabricacao = document.querySelector('#fabricacao');
 
-    slTipo.addEventListener('change', function() {
+    tipo.addEventListener('change', function() {
 
+        if(tipo.value == 0){
+            const selectElement = document.getElementById("marca");
+            selectElement.innerHTML = "";
+
+            var el = document.createElement("option");
+            el.textContent = 'Marca';
+            el.value = 0;
+            selectElement.appendChild(el);
+
+        } else {
+
+            console.log(tipo.value)
+            getMarcas(tipo.value);
+        }
     });
-
-    window.addEventListener('load', function () {
-
-        console.log(getMarcas())
-
-        getMarcas().then(promiseResult => {
-
-            let jsonMarcas = Object.entries(promiseResult);
-            console.log(jsonMarcas)
-            let select = document.getElementById("marca");
-
-            for (let chave in jsonMarcas) {
-                let option = document.createElement("option");
-                option.value = chave;
-                option.text = jsonMarcas[chave];
-                select.add(option);
-            }
-
-        });
-    
-    });
-
-
-
 
 
 
