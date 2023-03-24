@@ -1,4 +1,4 @@
-function getMarcas(tipoVeiculo = 'carros'){
+function getMarcas(tipoVeiculo){
 
   $.ajax({
     url: "https://parallelum.com.br/fipe/api/v1/" + tipoVeiculo + "/marcas",
@@ -23,48 +23,157 @@ function getMarcas(tipoVeiculo = 'carros'){
     });
 }
 
-function getModelos(tipoVeiculo = "carros", codMarca = "59") {
-    
-    let requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-    
-    let url = "https://parallelum.com.br/fipe/api/v1/" + tipoVeiculo + "/marca/" + codMarca + "/modelos";  
+function getModelos(tipoVeiculo, codMarca) {
 
-      fetch(url, requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+    $.ajax({
+      url: "https://parallelum.com.br/fipe/api/v1/" + tipoVeiculo + "/marcas/" + codMarca + "/modelos",
+      method: "GET",
+      success: function(response) {
+          
+        let select = document.querySelector('#modelo');
+        let options = response.modelos;
+
+        for(var i = 0; i < options.length; i++) {
+            var opt = options[i];
+            var el = document.createElement("option");
+            el.textContent = opt.nome;
+            el.value = opt.codigo;
+            select.appendChild(el);
+        }
+
+      },
+      error: function(error) {
+              console.log(error);
+      }
+    });
 }
 
-function getAnoVeiculo(modelo = "5940",tipoVeiculo = "carros", codMarca = "59") {
+function getAnoVeiculo(tipoVeiculo, codMarca, modelo) {
 
-    let requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-      
-    let url = "https://parallelum.com.br/fipe/api/v1/" + tipoVeiculo + "/marcas/" + codMarca + "/modelos/" + modelo + "/anos";
+    $.ajax({
+      url: "https://parallelum.com.br/fipe/api/v1/" + tipoVeiculo + "/marcas/" + codMarca + "/modelos/" + modelo + "/anos",
+      method: "GET",
+      success: function(response) {
 
-      fetch(url, requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        let select = document.querySelector('#fabricacao');
+        let options = response;
+
+        for(var i = 0; i < options.length; i++) {
+            var opt = options[i];
+            var el = document.createElement("option");
+            el.textContent = opt.nome;
+            el.value = opt.codigo;
+            select.appendChild(el);
+        }
+
+      },
+      error: function(error) {
+              console.log(error);
+      }
+    });
 }
 
-function getValorVeiculo(modelo = "5940",tipoVeiculo = "carros", codMarca = "59",codAno="2022-3" ) {
+function getValorVeiculo(tipoVeiculo, codMarca, modelo, codAno) {
 
-    let requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
+    $.ajax({
+      url: "https://parallelum.com.br/fipe/api/v1/" + tipoVeiculo + "/marcas/" + codMarca + "/modelos/" + modelo + "/anos/" + codAno,
+      method: "GET",
+      success: function(response) {
 
-    let url = "https://parallelum.com.br/fipe/api/v1/" + tipoVeiculo + "/marcas/" + codMarca + "/modelos/" + modelo + "/anos/" + codAno;  
-      
-      fetch("https://parallelum.com.br/fipe/api/v1/carros/marcas/59/modelos/5940/anos/2014-3", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        Swal.fire({
+          title: '<strong>Informações:</strong>',
+          html:
+          "<tr><td><span>Tipo Veículo:</span>  " + response.TipoVeiculo + "</td></tr><br>" +
+          "<tr><td><span>Tipo Valor:</span>  " + response.Valor + "</td></tr><br>" +
+          "<tr><td><span>Tipo Marca:</span>  " + response.Marca + "</td></tr><br>" +
+          "<tr><td><span>Tipo Modelo:</span>  " + response.Modelo + "</td></tr><br>" +
+          "<tr><td><span>Tipo AnoModelo:</span>  " + response.AnoModelo + "</td></tr><br>" +
+          "<tr><td><span>Tipo Combustivel:</span>  " + response.Combustivel + "</td></tr><br>" +
+          "<tr><td><span>Tipo CodigoFipe:</span>  " + response.CodigoFipe + "</td></tr><br>" +
+          "<tr><td><span>Tipo MesReferencia:</span>  " + response.MesReferencia + "</td></tr><br>" +
+          "<tr><td><span>Tipo SiglaCombustivel:</span>  " + response.SiglaCombustivel + "</td></tr><br>",
+          focusConfirm: false,
+          confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Fazer outra consulta!',
+          confirmButtonAriaLabel: 'Thumbs up, great!'
+      })
+      },
+      error: function(error) {
+              console.log(error);
+      }
+    });    
 }
 
+function limpaOption() {
+
+    const tipo = document.getElementById("marca");  
+    const marca = document.getElementById("marca");
+    const modelo = document.getElementById("modelo");
+    const fabricacao = document.getElementById("fabricacao");
+
+      if(tipo.value == 0){
+        marca.innerHTML = "";
+        modelo.innerHTML = "";
+        fabricacao.innerHTML = "";
+
+        let el = document.createElement("option");
+        el.textContent = 'Marca';
+        el.value = 0;
+        marca.appendChild(el);
+
+        let elModelo = document.createElement("option");
+        elModelo.textContent = 'Modelo';
+        elModelo.value = 0;
+        modelo.appendChild(elModelo);
+
+        let elFabricacao = document.createElement("option");
+        elFabricacao.textContent = 'Ano de Fabricação';
+        elFabricacao.value = 0;
+        fabricacao.appendChild(elFabricacao);
+
+      } else if(marca.value == 0){
+
+        marca.innerHTML = "";
+        modelo.innerHTML = "";
+        fabricacao.innerHTML = "";
+
+        let el = document.createElement("option");
+        el.textContent = 'Marca';
+        el.value = 0;
+        marca.appendChild(el);
+
+        let elModelo = document.createElement("option");
+        elModelo.textContent = 'Modelo';
+        elModelo.value = 0;
+        modelo.appendChild(elModelo);
+
+        let elFabricacao = document.createElement("option");
+        elFabricacao.textContent = 'Ano de Fabricação';
+        elFabricacao.value = 0;
+        fabricacao.appendChild(elFabricacao);
+
+      } else if (modelo.value == 0){
+
+        modelo.innerHTML = "";
+        fabricacao.innerHTML = "";
+
+        let elModelo = document.createElement("option");
+        elModelo.textContent = 'Modelo';
+        elModelo.value = 0;
+        modelo.appendChild(elModelo);
+
+        let elFabricacao = document.createElement("option");
+        elFabricacao.textContent = 'Ano de Fabricação';
+        elFabricacao.value = 0;
+        fabricacao.appendChild(elFabricacao);
+
+      } else if (fabricacao.value == 0){
+
+        fabricacao.innerHTML = "";
+
+        let elFabricacao = document.createElement("option");
+        elFabricacao.textContent = 'Ano de Fabricação';
+        elFabricacao.value = 0;
+        fabricacao.appendChild(elFabricacao);
+      }
+}

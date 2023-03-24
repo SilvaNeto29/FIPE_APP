@@ -119,7 +119,7 @@ input,select {
     transition: background-color 0.3s;
 }
 
-input[type="submit"] {
+input[type="button"] {
     cursor: pointer;
 }
 
@@ -135,7 +135,7 @@ select:disabled {
 
 .form select,
 .form input[type="text"],
-.form input[type="submit"] {
+.form input[type="button"] {
     inline-size: 100%;
 }
 
@@ -170,7 +170,7 @@ select:disabled {
 .login label,
 .login select,
 .login input[type="text"],
-.login input[type="submit"] {
+.login input[type="button"] {
     border-radius: var(--loginBorderRadus);
     padding: 1rem;
 }
@@ -196,15 +196,15 @@ select:disabled {
     background-color: var(--loginInputHoverBackgroundColor);
 }
 
-.login input[type="submit"] {
+.login input[type="button"] {
     background-color: var(--loginSubmitBackgroundColor);
     color: var(--loginSubmitColor);
     font-weight: 700;
     text-transform: uppercase;
 }
 
-.login input[type="submit"]:focus,
-.login input[type="submit"]:hover {
+.login input[type="button"]:focus,
+.login input[type="button"]:hover {
     background-color: var(--loginSubmitHoverBackgroundColor);
 }
 
@@ -214,4 +214,36 @@ p {
 
 .text--center {
     text-align: center;
+}
+
+.swal2-title,.swal2-styled {
+
+    font-family: var(--bodyFontFamily), var(--bodyFontFamilyFallback);
+    font-size: var(--bodyFontSize);
+    font-weight: 100 !important;
+    line-height: var(--bodyLineHeight);
+}
+
+.swal2-confirm, .swal2-styled {
+    background-color: var(--loginSubmitHoverBackgroundColor) !important;
+    border-radius: 30px !important; 
+}
+
+table, td {
+  border: 1px solid #cccccc;
+}
+
+td {
+  height: 80px;
+  width: 160px;
+  text-align: center !important;
+}
+
+.swal2-html-container{
+    color: #b4b4b4 !important;
+    font-weight: 700 !important;
+}
+
+span {
+    color: #ff8282 !important;
 }
