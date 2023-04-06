@@ -74,6 +74,7 @@
         if(tipo.value == 0){
             limpaOption();
         } else {
+            limpaOption(true);
             getMarcas(tipo.value);
         }
     });
@@ -84,7 +85,6 @@
         if(marca.value == 0){
             limpaOption();
         } else {
-            limpaOption(true);
             getModelos(tipo.value,marca.value);
         }
     });
