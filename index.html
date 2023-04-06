@@ -76,32 +76,36 @@
         } else {
             getMarcas(tipo.value);
         }
-
-        
     });
 
     let marca = document.querySelector('#marca');
     marca.addEventListener('change', function() {
 
-        limpaOption();
-        getModelos(tipo.value,marca.value);
-
-        
-        
+        if(marca.value == 0){
+            limpaOption();
+        } else {
+            getModelos(tipo.value,marca.value);
+        }
     });
 
     let modelo = document.querySelector('#modelo');
     modelo.addEventListener('change', function() {
 
-        limpaOption();
-        getAnoVeiculo(tipo.value, marca.value, modelo.value);      
+        if(modelo.value == 0){
+            limpaOption();
+        } else {
+            getAnoVeiculo(tipo.value, marca.value, modelo.value);      
+        }
     });
 
     let fabricacao = document.querySelector('#fabricacao');
     fabricacao.addEventListener('change', function() {
 
-        limpaOption();
-        getAnoVeiculo(tipo.value, marca.value, modelo.value);
+        if(fabricacao.value == 0){
+            limpaOption();
+        } else {
+            getAnoVeiculo(tipo.value, marca.value, modelo.value);
+        }
     });
 
     let verificar = document.getElementById('verificar');
@@ -119,6 +123,9 @@
         
     });
 
+    window.addEventListener("load", (event) => {
+        limpaOption();
+    });
 
     </script>
 </body>
