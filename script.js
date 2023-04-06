@@ -102,8 +102,9 @@ function getValorVeiculo(tipoVeiculo, codMarca, modelo, codAno) {
   })
 }
 
-function limpaOption() {
+function limpaOption(flag = false) {
 
+  if(!flag){
     let tipo = document.getElementById("tipo");  
     let marca = document.getElementById("marca");
     let modelo = document.getElementById("modelo");
@@ -129,4 +130,29 @@ function limpaOption() {
         fabricacao.appendChild(elFabricacao);
 
         tipo.selectedIndex = 0;
+  } else {
+
+    let marca = document.getElementById("marca");
+    let modelo = document.getElementById("modelo");
+    let fabricacao = document.getElementById("fabricacao");
+
+        marca.innerHTML = "";
+        modelo.innerHTML = "";
+        fabricacao.innerHTML = "";
+
+        let el = document.createElement("option");
+        el.textContent = 'Marca';
+        el.value = 0;
+        marca.appendChild(el);
+
+        let elModelo = document.createElement("option");
+        elModelo.textContent = 'Modelo';
+        elModelo.value = 0;
+        modelo.appendChild(elModelo);
+
+        let elFabricacao = document.createElement("option");
+        elFabricacao.textContent = 'Ano de Fabricação';
+        elFabricacao.value = 0;
+        fabricacao.appendChild(elFabricacao);
+  }     
 }
