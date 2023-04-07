@@ -83,8 +83,9 @@
     marca.addEventListener('change', function() {
 
         if(marca.value == 0){
-            limpaOption();
+            mudaMarca();
         } else {
+            mudaMarca();
             getModelos(tipo.value,marca.value);
         }
     });
@@ -93,20 +94,19 @@
     modelo.addEventListener('change', function() {
 
         if(modelo.value == 0){
-            limpaOption();
+            mudaModelo();
         } else {
+            mudaModelo();
             getAnoVeiculo(tipo.value, marca.value, modelo.value);      
         }
+
     });
 
     let fabricacao = document.querySelector('#fabricacao');
     fabricacao.addEventListener('change', function() {
 
-        if(fabricacao.value == 0){
-            limpaOption();
-        } else {
-            getAnoVeiculo(tipo.value, marca.value, modelo.value);
-        }
+        getAnoVeiculo(tipo.value, marca.value, modelo.value);
+        
     });
 
     let verificar = document.getElementById('verificar');

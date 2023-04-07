@@ -95,8 +95,6 @@ function getValorVeiculo(tipoVeiculo, codMarca, modelo, codAno) {
           focusConfirm: false,
           confirmButtonText:
           '<i class="fa fa-thumbs-up"></i> Fazer outra consulta!',
-      }).then((result) => {
-        limpaOption();
       })
     }
   })
@@ -155,4 +153,73 @@ function limpaOption(flag = false) {
         elFabricacao.value = 0;
         fabricacao.appendChild(elFabricacao);
   }     
+}
+
+function mudaMarca() {
+
+    let marca = document.getElementById("marca");
+    let modelo = document.getElementById("modelo");
+    let fabricacao = document.getElementById("fabricacao");
+
+    if(marca.value == 0){
+        marca.innerHTML = "";
+        modelo.innerHTML = "";
+        fabricacao.innerHTML = "";
+
+        let el = document.createElement("option");
+        el.textContent = 'Marca';
+        el.value = 0;
+        marca.appendChild(el);
+
+        let elModelo = document.createElement("option");
+        elModelo.textContent = 'Modelo';
+        elModelo.value = 0;
+        modelo.appendChild(elModelo);
+
+        let elFabricacao = document.createElement("option");
+        elFabricacao.textContent = 'Ano de Fabricação';
+        elFabricacao.value = 0;
+        fabricacao.appendChild(elFabricacao);
+    } else {
+      modelo.innerHTML = "";
+      fabricacao.innerHTML = "";
+
+      let elModelo = document.createElement("option");
+      elModelo.textContent = 'Modelo';
+      elModelo.value = 0;
+      modelo.appendChild(elModelo);
+
+      let elFabricacao = document.createElement("option");
+      elFabricacao.textContent = 'Ano de Fabricação';
+      elFabricacao.value = 0;
+      fabricacao.appendChild(elFabricacao);
+    }
+}
+
+function mudaModelo() {
+  
+  let modelo = document.getElementById("modelo");
+  let fabricacao = document.getElementById("fabricacao");
+
+  if(modelo.value == 0){
+      modelo.innerHTML = "";
+      fabricacao.innerHTML = "";
+
+      let elModelo = document.createElement("option");
+      elModelo.textContent = 'Modelo';
+      elModelo.value = 0;
+      modelo.appendChild(elModelo);
+
+      let elFabricacao = document.createElement("option");
+      elFabricacao.textContent = 'Ano de Fabricação';
+      elFabricacao.value = 0;
+      fabricacao.appendChild(elFabricacao);
+  } else {
+    fabricacao.innerHTML = "";
+
+    let elFabricacao = document.createElement("option");
+    elFabricacao.textContent = 'Ano de Fabricação';
+    elFabricacao.value = 0;
+    fabricacao.appendChild(elFabricacao);
+  }
 }

@@ -9,7 +9,7 @@
 
 
 .align {
-    display: grid;
+    display: flex !important;
     place-items: center;
 }
 
@@ -17,6 +17,8 @@
     inline-size: 90%;
     margin-inline: auto;
     max-inline-size: 20rem;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -145,6 +147,7 @@ select:disabled {
 
 .form__input {
     flex: 1;
+    width: 25em !important;
 }
 
 /* modules/login.css */
